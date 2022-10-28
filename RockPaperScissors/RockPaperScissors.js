@@ -1,38 +1,50 @@
-// Run through this until we get good input
 let goof = null;
-let input = ""; 
+let playerSelection = ""; 
 const Selections = {
     0: "rock",
     1: "paper",
     2: "scissors"
 }
-do{  
-    // Prompt the user for their input. store in variable
-    input = prompt("Rock (1), Paper (2), Scissors(3)\nWhat is your choice? Select a number 1-3:");
-    // validate input
-        // if it doesn't exist
-    if (!input){
-        alert("You done goofed, try again");
-    }
-        // it it's not 1, 2, or 3 
-    else if (input != 1 && input != 2 && input != 3){
-        //clear whatever garbage this """yEw-ZuRr""" tried feeding to us
-        input = null;
-        alert("You done goofed, try again");
-    } 
-    goof = !goof ? input : null; 
-} while (!goof)
-// shift user input to 0 base
-input--;
 
-// Roll opponent choice until it doesn't match the users choice, random number 0-2
-let opponentChoice;
-do{
-    opponentChoice = Math.floor(Math.random() * 3);
-} while (opponentChoice == input);
-// Compare choices, evaluate who wins
+for(idx = 0; idx < 5; idx++)console.log(playRound(getPlayerSelection(), getComputerSelection()));
 
-console.log(`Input is: ${input}\n Opponent is ${opponentChoice}`);
+function getPlayerSelection(){
+    do{ 
+        //reset goof variable for multiple runs
+        goof = null; 
+        // Prompt the user for their playerSelection. store in variable
+        playerSelection = prompt("Rock (1), Paper (2), Scissors(3)\nWhat is your choice? Select a number 1-3:");
+        // validate playerSelection
+            // if it doesn't exist
+        if (!playerSelection){
+            alert("You done goofed, try again");
+        }
+            // it it's not 1, 2, or 3 
+        else if (playerSelection != 1 && playerSelection != 2 && playerSelection != 3){
+            //clear whatever garbage this """yEw-ZuRr""" tried feeding to us
+            playerSelection = null;
+            alert("You done goofed, try again");
+        } 
+        goof = !goof ? playerSelection : null; 
+    } while (!goof)
+                            //shift to 0 base
+    return playerSelection - 1;
+}
+
+function getComputerSelection(player)
+{
+    // Roll opponent choice until it doesn't match the users choice, random number 0-2
+    let computerRoll = null;
+    do{
+        computerRoll = Math.floor(Math.random() * 3);
+    } while (computerRoll == playerSelection - 1);
+    return computerRoll;
+}
 
 // Compare choices, evaluate who wins, tell user how it went
-(input + 2) % 3 == (opponentChoice + 3) % 3 ? console.log(`You selected ${Selections[input]}\nOpponent selected ${Selections[opponentChoice]}\nDid you win?`) : console.log(`You selected ${Selections[input]}\nOpponent selected ${Selections[opponentChoice]}\nDid you lose?`);
+function playRound(playerSelection, computerSelection)
+{
+    return (playerSelection + 2) % 3 == (computerSelection + 3) % 3 
+    ? `You win! ${Selections[playerSelection]} beats ${Selections[computerSelection]}` 
+    : `You lose! ${Selections[computerSelection]} beats ${Selections[playerSelection]}`;
+}
