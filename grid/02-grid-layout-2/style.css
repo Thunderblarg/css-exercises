@@ -10,10 +10,10 @@ body, html {
   box-sizing: border-box;
   display: grid;
   grid-template:
-    [row1-start] "header header" 1fr [row1-end]
-    [row2-start] "sidebar nav" 1fr [row2-end]
-    [row3-start] "sidebar article" 5fr [row3-end]
-    [row4-start] "footer footer" 1fr [row4-end]
+    [row1-start] "header header"    1fr [row1-end]
+    [row2-start] "sidebar nav"      1fr [row2-end]
+    [row3-start] "sidebar article"  5fr [row3-end]
+    [row4-start] "footer footer"    1fr [row4-end]
     / 2fr 3fr;
   gap: 15px;
 }
@@ -30,7 +30,7 @@ body, html {
 .header {
   background-color: #FFDE22;
   grid-area: header;
-}b
+}
 
 .sidebar {
   background-color: #FF7755;
